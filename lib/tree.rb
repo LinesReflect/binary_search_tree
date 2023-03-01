@@ -7,7 +7,7 @@ class Tree
   end
 
   def build_tree(data, first = 0, last = data.length - 1, middle = (first + last) / 2)
-    return Node.new(data) if data.length == 1
+    return Node.new(data[first]) if data.length == 1
 
     if data.length == 2
       left = [data[first]]
