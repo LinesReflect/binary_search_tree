@@ -6,18 +6,20 @@ class Tree
     @root = build_tree(@array)
   end
 
-  def build_tree(data, first = 0, last = data.length - 1, middle = (first + last) / 2)
-    return Node.new(data[first]) if data.length == 1
+  def build_tree(array)
+    return Node.new(array[0]) if array.length == 1
 
-    if data.length == 2
-      left = [data[first]]
-      right = [data[last]]
+    if array.length == 2
+      left = array[0]
+      right = array[array.length - 1]
+      return Node.new(left, nil, Node.new(right))
     else
-      left = data[first..(middle - 1)]
-      right = data[(middle + 1)..last]
+      middle = (0 + array.length - 1) / 2
+      left = array[0..(middle - 1)]
+      right = array[(middle + 1)..array.length - 1]
     end
 
-    Node.new(data[middle], build_tree(left), build_tree(right))
+    Node.new(array[middle], build_tree(left), build_tree(right))
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
