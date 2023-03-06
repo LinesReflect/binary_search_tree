@@ -58,9 +58,7 @@ class Tree
       delete(replacement_node.data)
       replacement_node.left_child = current_node.left_child
       replacement_node.right_child = current_node.right_child
-      if parent_node.nil?
-        return @root = replacement_node
-      end
+      return @root = replacement_node if parent_node.nil?
       parent_node.left_child == current_node ? parent_node.left_child = replacement_node : parent_node.right_child = replacement_node
     end
   end
