@@ -73,4 +73,12 @@ class Tree
 
     value < current_node.data ? find(value, current_node.left_child) : find(value, current_node.right_child)
   end
+
+  def height(current_node, count = -1)
+    return count if current_node.nil?
+  
+    current_node = find(current_node) if current_node.instance_of? Integer
+    count += 1
+    height(current_node.left_child) < height(current_node.right_child) ? height(current_node.right_child, count) : height(current_node.left_child, count)
+  end
 end
