@@ -76,9 +76,22 @@ class Tree
 
   def height(current_node, count = -1)
     return count if current_node.nil?
-  
+
     current_node = find(current_node) if current_node.instance_of? Integer
     count += 1
     height(current_node.left_child) < height(current_node.right_child) ? height(current_node.right_child, count) : height(current_node.left_child, count)
+  end
+
+  def depth(current_node, count = 0, parent_node = @root)
+    return count if current_node == @root
+
+    current_node = find(current_node) if current_node.instance_of? Integer
+
+    until parent_node.left_child == current_node || parent_node.right_child == current_node
+      parent_node = current_node.data < parent_node.data ? parent_node.left_child : parent_node.right_child
+    end
+
+    count += 1
+    depth(parent_node, count)
   end
 end
