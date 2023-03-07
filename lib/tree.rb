@@ -83,7 +83,7 @@ class Tree
   end
 
   def depth(current_node, count = 0, parent_node = @root)
-    return count if current_node == @root
+    return count if find(current_node) == @root
 
     current_node = find(current_node) if current_node.instance_of? Integer
 
