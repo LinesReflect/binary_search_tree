@@ -83,9 +83,10 @@ class Tree
   end
 
   def depth(current_node, count = 0, parent_node = @root)
-    return count if find(current_node) == @root
+    return count if current_node == @root.data
+    return count if current_node == @root
 
-    current_node = find(current_node) if current_node.instance_of? Integer
+    current_node = find(current_node) unless current_node.instance_of? Node
 
     until parent_node.left_child == current_node || parent_node.right_child == current_node
       parent_node = current_node.data < parent_node.data ? parent_node.left_child : parent_node.right_child
@@ -147,5 +148,11 @@ class Tree
       array << current_node.data
       return array
     end
+  end
+
+  def balanced?(current_node = @root)
+    return false unless depth(current_node.left_child) === depth(current_node.right_child)
+
+    return true
   end
 end
