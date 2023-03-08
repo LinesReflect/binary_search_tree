@@ -94,4 +94,18 @@ class Tree
     count += 1
     depth(parent_node, count)
   end
+
+  def level_order(queue = [@root])
+    data = []
+    until queue.length == 0 do
+        queue.each do |node|
+            queue.push(node.left_child) unless node.left_child.nil?
+            queue.push(node.right_child) unless node.right_child.nil?
+            (block_given?)? data << yield(node.data) : data << node.data
+            queue.delete(node)
+            break
+        end
+      end
+      data if !(block_given?)
+  end
 end
