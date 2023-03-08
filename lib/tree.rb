@@ -122,4 +122,18 @@ class Tree
       return array
     end
   end
+
+  def preorder(current_node = @root, array = [])
+    if block_given?
+      yield(current_node.data)
+      left = preorder(current_node.left_child, array) unless current_node.left_child.nil?
+      right = preorder(current_node.right_child, array) unless current_node.right_child.nil?
+
+    else
+      array << current_node.data
+      left = preorder(current_node.left_child, array) unless current_node.left_child.nil?
+      right = preorder(current_node.right_child, array) unless current_node.right_child.nil?
+      return array
+    end
+  end
 end
