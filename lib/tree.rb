@@ -108,4 +108,18 @@ class Tree
       end
       data if !(block_given?)
   end
+
+  def inorder(current_node = @root, array = [])
+    if block_given?
+      left = inorder(current_node.left_child, array) unless current_node.left_child.nil?
+      yield(current_node.data)
+      right = inorder(current_node.right_child, array) unless current_node.right_child.nil?
+
+    else
+      left = inorder(current_node.left_child, array) unless current_node.left_child.nil?
+      array << current_node.data
+      right = inorder(current_node.right_child, array) unless current_node.right_child.nil?
+      return array
+    end
+  end
 end
