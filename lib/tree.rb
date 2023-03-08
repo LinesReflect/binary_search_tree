@@ -98,15 +98,15 @@ class Tree
   def level_order(queue = [@root])
     data = []
     until queue.length == 0 do
-        queue.each do |node|
-            queue.push(node.left_child) unless node.left_child.nil?
-            queue.push(node.right_child) unless node.right_child.nil?
-            (block_given?)? data << yield(node.data) : data << node.data
-            queue.delete(node)
-            break
-        end
+      queue.each do |node|
+        queue.push(node.left_child) unless node.left_child.nil?
+        queue.push(node.right_child) unless node.right_child.nil?
+        (block_given?)? data << yield(node.data) : data << node.data
+        queue.delete(node)
+        break
       end
-      data if !(block_given?)
+    end
+    data if !(block_given?)
   end
 
   def inorder(current_node = @root, array = [])
