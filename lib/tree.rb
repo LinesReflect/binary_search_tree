@@ -151,8 +151,13 @@ class Tree
   end
 
   def balanced?(current_node = @root)
-    return false unless depth(current_node.left_child) === depth(current_node.right_child)
+    return false unless height(current_node.left_child) === height(current_node.right_child)
 
     return true
+  end
+
+  def rebalance
+    return if balanced?
+    @root = build_tree(inorder)
   end
 end
