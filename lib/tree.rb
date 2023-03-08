@@ -128,11 +128,23 @@ class Tree
       yield(current_node.data)
       left = preorder(current_node.left_child, array) unless current_node.left_child.nil?
       right = preorder(current_node.right_child, array) unless current_node.right_child.nil?
-
     else
       array << current_node.data
       left = preorder(current_node.left_child, array) unless current_node.left_child.nil?
       right = preorder(current_node.right_child, array) unless current_node.right_child.nil?
+      return array
+    end
+  end
+
+  def postorder(current_node = @root, array = [])
+    if block_given?
+      left = postorder(current_node.left_child, array) unless current_node.left_child.nil?
+      right = postorder(current_node.right_child, array) unless current_node.right_child.nil?
+      yield(current_node.data)
+    else
+      left = postorder(current_node.left_child, array) unless current_node.left_child.nil?
+      right = postorder(current_node.right_child, array) unless current_node.right_child.nil?
+      array << current_node.data
       return array
     end
   end
